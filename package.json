@@ -1,45 +1,45 @@
 {
-    "name": "ut-swagger2-validator",
-    "version": "0.1.0",
-    "description": "Swagger2 validator",
-    "main": "index.js",
-    "scripts": {
-      "lint": "ut-lint .",
-      "release": "ut-release",
-      "changelog": "ut-changelog",
-      "check": "ut-check",
-      "cover": "ut-cover",
-      "precover": "ut-precover",
-      "lint-js": "ut-lint-js .",
-      "postpublish": "ut-postpublish",
-      "postversion": "ut-postversion",
-      "precommit": "ut-precommit",
-      "prepublish": "ut-prepublish",
-      "prepush": "ut-prepush",
-      "pretest": "ut-pretest",
-      "preversion": "ut-preversion",
-      "test": "ut-test",
-      "version": "ut-version",
-      "jenkins": "ut-jenkins",
-      "gitlab": "ut-gitlab"
-    },
-    "keywords": [
-      "swagger",
-      "swagger validator",
-      "swagger 2",
-      "swagger 2 validator"
-    ],
-    "devDependencies": {
-      "tap": "^12.6.2",
-      "ut-tools": "^6.20.1"
-    },
-    "dependencies": {
-      "ajv": "6.10.0",
-      "swagger-parser": "6.0.5"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git@github.com:softwaregroup-bg/ut-swagger2-validator.git"
-    },
-    "license": "Apache-2.0"
-  }
+  "name": "ut-swagger2-validator",
+  "version": "0.1.0",
+  "description": "Swagger2 validator",
+  "main": "index.js",
+  "scripts": {
+    "lint": "ut-lint .",
+    "release": "ut-release",
+    "changelog": "ut-changelog",
+    "check": "ut-check",
+    "cover": "ut-cover",
+    "precover": "ut-precover",
+    "lint-js": "ut-lint-js .",
+    "postpublish": "ut-postpublish",
+    "postversion": "ut-postversion",
+    "precommit": "ut-precommit",
+    "prepublish": "ut-prepublish",
+    "prepush": "ut-prepush",
+    "pretest": "ut-pretest",
+    "preversion": "ut-preversion",
+    "test": "ut-test",
+    "version": "ut-version",
+    "jenkins": "ut-jenkins",
+    "gitlab": "ut-gitlab"
+  },
+  "keywords": [
+    "swagger",
+    "swagger validator",
+    "swagger 2",
+    "swagger 2 validator"
+  ],
+  "devDependencies": {
+    "tap": "^12.6.2",
+    "ut-tools": "^6.20.1"
+  },
+  "dependencies": {
+    "ajv": "6.10.0",
+    "swagger-parser": "6.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:softwaregroup-bg/ut-swagger2-validator.git"
+  },
+  "license": "Apache-2.0"
+}
