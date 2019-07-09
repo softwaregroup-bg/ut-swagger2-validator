@@ -43,7 +43,7 @@ module.exports = async swaggerDocument => {
                 }) {
                     const errors = [];
                     if (params.length === 0) {
-                        const error = await validator.empty()(body);
+                        const { error } = await validator.empty()(body);
                         if (error) {
                             error.where = 'body';
                             errors.push(error);
@@ -61,9 +61,19 @@ module.exports = async swaggerDocument => {
                         for (let i = 0; i < params.length; i += 1) {
                             let value;
                             const param = params[i];
+                            let validate = param.validate;
                             switch (param.in) {
+                                case 'headers':
+                                    value = headers[param.name];
+                                    break;
                                 case 'query':
                                     value = query[param.name];
+                                    validate = async value => {
+                                        const validation = await param.validate(value);
+                                        // reassign value if casted. E.g. 'true' -> true or '1' -> 1
+                                        if (validation.result !== value) query[param.name] = validation.result;
+                                        return validation;
+                                    };
                                     break;
                                 case 'path':
                                     if (path) {
@@ -71,6 +81,12 @@ module.exports = async swaggerDocument => {
                                         value = actual ? actual[expected.indexOf(`{${param.name}}`)] : undefined;
                                     } else {
                                         value = pathParameters[param.name];
+                                        validate = async value => {
+                                            const validation = await param.validate(value);
+                                            // reassign value if casted. E.g. 'true' -> true or '1' -> 1
+                                            if (validation.result !== value) pathParameters[param.name] = validation.result;
+                                            return validation;
+                                        };
                                     }
                                     break;
                                 case 'formData':
@@ -81,20 +97,16 @@ module.exports = async swaggerDocument => {
                                     value = body;
                                     hasBody = true;
                                     break;
-                                case 'headers':
-                                    value = headers[param.name];
-                                    hasBody = true;
-                                    break;
                             }
-                            const error = await param.validate(value);
+                            const { error } = await validate(value);
                             if (error) {
                                 error.where = param.in;
                                 error.name = param.name;
                                 errors.push(error);
                             }
                         }
-                        if (!hasBody && body !== undefined) {
-                            const error = await validator.empty()(body);
+                        if (!hasBody) {
+                            const { error } = await validator.empty()(body);
                             error && errors.push(error);
                         }
                     }
@@ -102,7 +114,7 @@ module.exports = async swaggerDocument => {
                 },
                 response: async function validateResponse({status, body}) {
                     const validate = (responses[status] || responses.default).validate;
-                    const error = await validate(body);
+                    const { error } = await validate(body);
                     return error ? [error] : [];
                 }
             };

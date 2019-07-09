@@ -8,13 +8,13 @@ const getValidationHandler = originalSchema => {
     }
     const validate = ajv.compile(schema);
     return async value => {
-        let error;
+        const validation = {result: value};
         try {
             await validate(value);
         } catch (e) {
-            error = e;
+            validation.error = e;
         }
-        return error;
+        return validation;
     };
 };
 const collectionFormats = {
@@ -94,7 +94,7 @@ module.exports = {
                         break;
                 }
             } else if (!schema['x-required']) {
-                return;
+                return { result: value };
             }
             return validate(value);
         };
