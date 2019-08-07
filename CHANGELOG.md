@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.2.0...v0.3.0) (2019-08-07)
+
+
+### Features
+
+* add support for x-nullable keyword ([7fe3148](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/7fe3148))
+
+
+
 # [0.2.0](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.1.1...v0.2.0) (2019-07-09)
 
 
