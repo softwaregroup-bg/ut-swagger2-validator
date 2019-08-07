@@ -1,11 +1,33 @@
 const Ajv = require('./ajv');
 const ajv = new Ajv({allErrors: true, $data: true, useDefaults: true});
-const getValidationHandler = originalSchema => {
-    const schema = {...originalSchema, $async: true}; // don't override by reference
+
+const decorateSchema = schema => {
     if (typeof schema.required === 'boolean') {
         schema['x-required'] = schema.required; // json schema 4 support
         delete schema.required;
     }
+
+    if (schema['x-nullable'] === true) {
+        return {
+            oneOf: [
+                schema,
+                { type: 'null' }
+            ]
+        };
+    }
+
+    if (schema.properties) {
+        Object.entries(schema.properties).forEach(([key, value]) => {
+            schema.properties[key] = decorateSchema(value);
+        });
+    } else if (schema.items) {
+        schema.items = decorateSchema(schema.items);
+    }
+    return schema;
+};
+
+const getValidationHandler = originalSchema => {
+    const schema = decorateSchema({...originalSchema, $async: true});
     const validate = ajv.compile(schema);
     return async value => {
         const validation = {result: value};
