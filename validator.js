@@ -3,10 +3,34 @@ const ajv = new Ajv({allErrors: true, $data: true, useDefaults: true});
 
 const decorateSchema = originalSchema => {
     const schema = {...originalSchema};
-    if (typeof schema.required === 'boolean') {
-        schema['x-required'] = schema.required; // json schema 4 support
-        delete schema.required;
-    }
+
+    Object.keys(schema).forEach(key => {
+        switch (key) {
+            case 'required':
+                if (typeof schema.required === 'boolean') {
+                    schema['x-required'] = schema.required; // json schema 4 support
+                    delete schema.required;
+                }
+                break;
+            case 'properties':
+                schema.properties = Object.entries(schema.properties).reduce((all, [key, value]) => {
+                    all[key] = decorateSchema(value);
+                    return all;
+                }, {});
+                break;
+            case 'items':
+            case 'not':
+                schema[key] = decorateSchema(schema[key]);
+                break;
+            case 'oneOf':
+            case 'allOf':
+            case 'anyOf':
+                schema[key] = schema[key].map(decorateSchema);
+                break;
+            default:
+                break;
+        }
+    });
 
     if (schema['x-nullable'] === true) {
         return {
@@ -17,14 +41,6 @@ const decorateSchema = originalSchema => {
         };
     }
 
-    if (schema.properties) {
-        schema.properties = Object.entries(schema.properties).reduce((all, [key, value]) => {
-            all[key] = decorateSchema(value);
-            return all;
-        }, {});
-    } else if (schema.items) {
-        schema.items = decorateSchema(schema.items);
-    }
     return schema;
 };
 
