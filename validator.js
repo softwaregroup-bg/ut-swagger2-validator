@@ -1,11 +1,36 @@
 const Ajv = require('./ajv');
 const ajv = new Ajv({allErrors: true, $data: true, useDefaults: true});
 
-const decorateSchema = schema => {
-    if (typeof schema.required === 'boolean') {
-        schema['x-required'] = schema.required; // json schema 4 support
-        delete schema.required;
-    }
+const decorateSchema = originalSchema => {
+    const schema = {...originalSchema};
+
+    Object.keys(schema).forEach(key => {
+        switch (key) {
+            case 'required':
+                if (typeof schema.required === 'boolean') {
+                    schema['x-required'] = schema.required; // json schema 4 support
+                    delete schema.required;
+                }
+                break;
+            case 'properties':
+                schema.properties = Object.entries(schema.properties).reduce((all, [key, value]) => {
+                    all[key] = decorateSchema(value);
+                    return all;
+                }, {});
+                break;
+            case 'items':
+            case 'not':
+                schema[key] = decorateSchema(schema[key]);
+                break;
+            case 'oneOf':
+            case 'allOf':
+            case 'anyOf':
+                schema[key] = schema[key].map(decorateSchema);
+                break;
+            default:
+                break;
+        }
+    });
 
     if (schema['x-nullable'] === true) {
         return {
@@ -16,18 +41,12 @@ const decorateSchema = schema => {
         };
     }
 
-    if (schema.properties) {
-        Object.entries(schema.properties).forEach(([key, value]) => {
-            schema.properties[key] = decorateSchema(value);
-        });
-    } else if (schema.items) {
-        schema.items = decorateSchema(schema.items);
-    }
     return schema;
 };
 
 const getValidationHandler = originalSchema => {
-    const schema = decorateSchema({...originalSchema, $async: true});
+    const schema = decorateSchema(originalSchema);
+    schema.$async = true;
     const validate = ajv.compile(schema);
     return async value => {
         const validation = {result: value};
