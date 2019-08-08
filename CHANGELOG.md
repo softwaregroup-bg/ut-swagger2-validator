@@ -1,3 +1,13 @@
+## [0.3.1](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.3.0...v0.3.1) (2019-08-08)
+
+
+### Bug Fixes
+
+* clone schema properly ([f29311e](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/f29311e))
+* handle oneOf, anyOf, allOf and not ([7ff6625](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/7ff6625))
+
+
+
 # [0.3.0](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.2.0...v0.3.0) (2019-08-07)
 
 
