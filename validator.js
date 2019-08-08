@@ -1,7 +1,8 @@
 const Ajv = require('./ajv');
 const ajv = new Ajv({allErrors: true, $data: true, useDefaults: true});
 
-const decorateSchema = schema => {
+const decorateSchema = originalSchema => {
+    const schema = {...originalSchema};
     if (typeof schema.required === 'boolean') {
         schema['x-required'] = schema.required; // json schema 4 support
         delete schema.required;
@@ -17,9 +18,10 @@ const decorateSchema = schema => {
     }
 
     if (schema.properties) {
-        Object.entries(schema.properties).forEach(([key, value]) => {
-            schema.properties[key] = decorateSchema(value);
-        });
+        schema.properties = Object.entries(schema.properties).reduce((all, [key, value]) => {
+            all[key] = decorateSchema(value);
+            return all;
+        }, {});
     } else if (schema.items) {
         schema.items = decorateSchema(schema.items);
     }
@@ -27,7 +29,8 @@ const decorateSchema = schema => {
 };
 
 const getValidationHandler = originalSchema => {
-    const schema = decorateSchema({...originalSchema, $async: true});
+    const schema = decorateSchema(originalSchema);
+    schema.$async = true;
     const validate = ajv.compile(schema);
     return async value => {
         const validation = {result: value};
