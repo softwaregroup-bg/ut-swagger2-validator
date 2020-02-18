@@ -29,7 +29,7 @@ class UtAjv extends Ajv {
                 const schema = originalSchema.map(originalRule => {
                     // don't override rule by reference
                     const rule = Object.assign({}, originalRule);
-                    if (rule.hasOwnProperty('pattern')) {
+                    if (rule.pattern) {
                         try {
                             rule.pattern = new RegExp(rule.pattern);
                         } catch (e) {
@@ -55,7 +55,7 @@ class UtAjv extends Ajv {
                             const matches = [];
                             for (let j = 0; j < value.length; j += 1) {
                                 const record = value[j];
-                                if (!record.hasOwnProperty(rule.key)) {
+                                if (!record[rule.key]) {
                                     errors.push(`${rule.key} was not provided on index ${j}`);
                                     continue;
                                 }
@@ -118,7 +118,7 @@ class UtAjv extends Ajv {
                             description: 'max',
                             type: 'integer',
                             minimum: {
-                                '$data': '1/min'
+                                $data: '1/min'
                             }
                         },
                         value: {
