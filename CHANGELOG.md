@@ -1,3 +1,13 @@
+## [0.3.2](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.3.1...v0.3.2) (2020-02-18)
+
+
+### Bug Fixes
+
+* lint ([b2774dd](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/b2774dd609d4ea45fb61a843801adfb77c9848bb))
+* typo ([1b71219](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/1b71219a80141b0e6b0e98180f1da122e2271b54))
+
+
+
 ## [0.3.1](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.3.0...v0.3.1) (2019-08-08)
 
 
