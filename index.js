@@ -63,7 +63,7 @@ module.exports = async swaggerDocument => {
                             const param = params[i];
                             let validate = param.validate;
                             switch (param.in) {
-                                case 'headers':
+                                case 'header':
                                     value = headers[param.name];
                                     break;
                                 case 'query':
