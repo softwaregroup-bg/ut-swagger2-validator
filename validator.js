@@ -134,7 +134,7 @@ module.exports = {
                     default:
                         break;
                 }
-            } else if (!schema['x-required']) {
+            } else if (!schema.required) {
                 return { result: value };
             }
             return validate(value);
