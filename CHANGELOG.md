@@ -1,3 +1,12 @@
+## [0.3.4](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.3.3...v0.3.4) (2020-03-19)
+
+
+### Bug Fixes
+
+* required fields validation ([58c8c9c](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/58c8c9ce96a6a02bf18a7bb41786e2c1f53647f5))
+
+
+
 ## [0.3.3](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.3.2...v0.3.3) (2020-03-02)
 
 
