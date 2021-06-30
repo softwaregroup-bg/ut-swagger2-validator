@@ -2,7 +2,8 @@ const Ajv = require('ajv');
 class UtAjv extends Ajv {
     constructor(options) {
         super(options);
-        this.addKeyword('x-file', {
+        this.addKeyword({
+            keyword: 'x-file',
             compile: schema => value => {
                 const isFile = value && value.constructor.name === 'File';
                 return schema === true ? isFile : !isFile;
@@ -12,7 +13,8 @@ class UtAjv extends Ajv {
                 type: 'boolean'
             }
         });
-        this.addKeyword('x-required', {
+        this.addKeyword({
+            keyword: 'x-required',
             compile: schema => value => {
                 return schema === true ? typeof value !== 'undefined' : true;
             },
@@ -21,7 +23,8 @@ class UtAjv extends Ajv {
                 type: 'boolean'
             }
         });
-        this.addKeyword('x-occurrences', {
+        this.addKeyword({
+            keyword: 'x-occurrences',
             type: 'array',
             errors: true,
             compile: originalSchema => {
