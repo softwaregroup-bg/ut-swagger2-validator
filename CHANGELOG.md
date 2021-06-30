@@ -1,3 +1,12 @@
+## [0.4.1](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.3.4...v0.4.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* upgrade dependencies [UTCORE-121] ([82aa581](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/82aa58198e1c859e06941aeecc9bd5e87a8db187))
+
+
+
 ## [0.3.4](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.3.3...v0.3.4) (2020-03-19)
 
 
