@@ -1,4 +1,4 @@
-const swaggerParser = require('swagger-parser');
+const swaggerParser = require('@apidevtools/swagger-parser');
 const validator = require('./validator');
 module.exports = async swaggerDocument => {
     const swagger = await swaggerParser.dereference(swaggerDocument);

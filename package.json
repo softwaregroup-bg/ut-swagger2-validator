@@ -1,6 +1,6 @@
 {
   "name": "ut-swagger2-validator",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "Swagger2 validator",
   "main": "index.js",
   "scripts": {
@@ -30,12 +30,12 @@
     "swagger 2 validator"
   ],
   "devDependencies": {
-    "tap": "^12.6.2",
-    "ut-tools": "^6.33.2"
+    "tap": "^15.0.9",
+    "ut-tools": "^6.38.2"
   },
   "dependencies": {
-    "ajv": "6.10.0",
-    "swagger-parser": "6.0.5"
+    "ajv": "8.6.0",
+    "@apidevtools/swagger-parser": "10.0.2"
   },
   "repository": {
     "type": "git",
