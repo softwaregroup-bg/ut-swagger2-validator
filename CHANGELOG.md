@@ -1,3 +1,12 @@
+## [0.4.2](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.4.1...v0.4.2) (2021-06-30)
+
+
+### Bug Fixes
+
+* deprecated api [UTCORE-121] ([ba9bcf2](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/ba9bcf2a6be060e2dd9614f4b80d38a6d9bb3d7e))
+
+
+
 ## [0.4.1](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.3.4...v0.4.1) (2021-06-30)
 
 
