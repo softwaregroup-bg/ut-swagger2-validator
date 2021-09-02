@@ -1,3 +1,12 @@
+# [0.5.0](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.4.2...v0.5.0) (2021-09-02)
+
+
+### Features
+
+* get validator by path and method ([178126e](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/178126e38c6872c8f086daceb2b5d89c4ca162da))
+
+
+
 ## [0.4.2](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.4.1...v0.4.2) (2021-06-30)
 
 
