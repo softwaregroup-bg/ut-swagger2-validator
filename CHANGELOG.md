@@ -1,3 +1,12 @@
+## [0.5.1](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.0...v0.5.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* methodValidator is sync ([6b0bfc8](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/6b0bfc88eca38a81f7803c5841d62122bacba36c))
+
+
+
 # [0.5.0](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.4.2...v0.5.0) (2021-09-02)
 
 

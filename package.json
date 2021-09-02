@@ -1,6 +1,6 @@
 {
   "name": "ut-swagger2-validator",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Swagger2 validator",
   "main": "index.js",
   "scripts": {
