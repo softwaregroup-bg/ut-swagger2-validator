@@ -117,20 +117,22 @@ function methodValidator(swagger, pathName, methodName) {
     };
 }
 
-module.exports = async(swaggerDocument, pathName, methodName) => {
+module.exports = (swaggerDocument, pathName, methodName) => {
     if (pathName && methodName) return methodValidator(swaggerDocument, pathName, methodName);
-    const swagger = await swaggerParser.dereference(swaggerDocument);
-    return Object.entries(swagger.paths).reduce(
-        (validators, [pathName, path]) => {
-            if (!pathName.startsWith('x-')) {
-                Object.entries(path).forEach(([methodName, method]) => {
-                    if (methodName !== 'parameters' && !methodName.startsWith('x-')) {
-                        validators[method.operationId] = methodValidator(swagger, pathName, methodName);
-                    }
-                });
-            }
-            return validators;
-        },
-        {}
-    );
+    return (async() => {
+        const swagger = await swaggerParser.dereference(swaggerDocument);
+        return Object.entries(swagger.paths).reduce(
+            (validators, [pathName, path]) => {
+                if (!pathName.startsWith('x-')) {
+                    Object.entries(path).forEach(([methodName, method]) => {
+                        if (methodName !== 'parameters' && !methodName.startsWith('x-')) {
+                            validators[method.operationId] = methodValidator(swagger, pathName, methodName);
+                        }
+                    });
+                }
+                return validators;
+            },
+            {}
+        );
+    })();
 };

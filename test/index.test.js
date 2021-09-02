@@ -32,7 +32,7 @@ tap.test('full document', async assert => {
 
 tap.test('single method', async assert => {
     const document = await swaggerParser.dereference(resolve(__dirname, 'parking.yaml'));
-    const validator = await validate(document, '/parking/pay', 'post');
+    const validator = validate(document, '/parking/pay', 'post');
     for (const [params, name] of requests) {
         assert.matchSnapshot(await validator.request(params), name);
     }
