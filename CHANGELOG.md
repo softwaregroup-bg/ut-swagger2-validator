@@ -1,3 +1,12 @@
+## [0.5.2](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.1...v0.5.2) (2021-09-15)
+
+
+### Bug Fixes
+
+* pass valid parameters to ajv [UTCORE-121] ([cbead7f](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/cbead7fe73f455fdcb86f383cd6a3db9fad70f13))
+
+
+
 ## [0.5.1](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.0...v0.5.1) (2021-09-02)
 
 
