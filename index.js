@@ -3,7 +3,7 @@ const validator = require('./validator');
 
 function methodValidator(swagger, pathName, methodName) {
     const basePath = swagger.basePath || '';
-    const path = swagger.paths[pathName];
+    const path = swagger.paths[pathName.slice(basePath.length)];
     const method = path[methodName];
     const params = []
         .concat(path.parameters)
@@ -126,7 +126,11 @@ module.exports = (swaggerDocument, pathName, methodName) => {
                 if (!pathName.startsWith('x-')) {
                     Object.entries(path).forEach(([methodName, method]) => {
                         if (methodName !== 'parameters' && !methodName.startsWith('x-')) {
-                            validators[method.operationId] = methodValidator(swagger, pathName, methodName);
+                            validators[method.operationId] = methodValidator(
+                                swagger,
+                                (swagger.basePath || '') + pathName,
+                                methodName
+                            );
                         }
                     });
                 }
