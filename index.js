@@ -126,7 +126,7 @@ module.exports = (swaggerDocument, pathName, methodName) => {
                 if (!pathName.startsWith('x-')) {
                     Object.entries(path).forEach(([methodName, method]) => {
                         if (methodName !== 'parameters' && !methodName.startsWith('x-')) {
-                            validators[method.operationId] = methodValidator(swagger, pathName, methodName);
+                            validators[method.operationId] = methodValidator(swagger, basePath + pathName, methodName);
                         }
                     });
                 }
