@@ -1,3 +1,12 @@
+## [0.5.3](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.2...v0.5.3) (2021-11-19)
+
+
+### Bug Fixes
+
+* UTCORE-152 fix path match if basepath is set ([#7](https://github.com/softwaregroup-bg/ut-swagger2-validator/issues/7)) ([b130967](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/b13096773ddb97d63cfd4a97bf724b250b1f37c6))
+
+
+
 ## [0.5.2](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.1...v0.5.2) (2021-09-15)
 
 
