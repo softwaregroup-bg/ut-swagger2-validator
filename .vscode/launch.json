@@ -1,0 +1,46 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Test",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/test/index.test.js",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "console": "externalTerminal",
+            "runtimeArgs": [
+                "--preserve-symlinks",
+                "--nolazy",
+                "--max_old_space_size=500000"
+            ],
+            "env": {
+                "ut_regix_test_run__logLevel": "trace",
+                "UT_ENV": "test",
+                "NODE_PATH": "dev"
+            },
+            "outputCapture": "std"
+        },
+        {
+            "name": "Test SNAPSHOT",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/test/index.test.js",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "console": "externalTerminal",
+            "runtimeArgs": [
+                "--preserve-symlinks",
+                "--nolazy",
+                "--max_old_space_size=500000"
+            ],
+            "env": {
+                "ut_regix_test_run__logLevel": "trace",
+                "UT_ENV": "test",
+                "NODE_PATH": "dev",
+                "TAP_SNAPSHOT": "1"
+            },
+            "outputCapture": "std"
+        }
+    ]
+}
