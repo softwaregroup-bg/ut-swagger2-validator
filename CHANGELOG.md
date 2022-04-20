@@ -1,3 +1,12 @@
+## [0.5.4](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.3...v0.5.4) (2022-04-20)
+
+
+### Bug Fixes
+
+* add openapi 3 json validation support for request/response ([#8](https://github.com/softwaregroup-bg/ut-swagger2-validator/issues/8)) ([d5f4e03](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/d5f4e03cdb49803683f9ec0ab430c1647b61d393))
+
+
+
 ## [0.5.3](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.2...v0.5.3) (2021-11-19)
 
 
