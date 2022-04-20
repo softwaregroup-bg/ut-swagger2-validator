@@ -10,7 +10,7 @@ function methodValidator(swagger, pathName, methodName, basePath) {
         .concat(method.parameters)
         .filter(x => x)
         .map(param => {
-            const schema = param.schema || param.content?.['application/json']?.schema || (({name, in: ignore, ...schema}) => schema)(param);
+            const schema = param.schema || (({name, in: ignore, ...schema}) => schema)(param);
             if (['query', 'header', 'path'].indexOf(param.in) !== -1) {
                 param.validate = validator.primitive(schema);
             } else if (param.in === 'formData') {
