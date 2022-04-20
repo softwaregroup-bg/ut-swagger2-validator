@@ -1,16 +1,16 @@
 const swaggerParser = require('@apidevtools/swagger-parser');
 const validator = require('./validator');
 
-function methodValidator(swagger, pathName, methodName) {
-    const basePath = swagger.basePath || '';
+function methodValidator(swagger, pathName, methodName, basePath) {
+    if (!basePath) basePath = swagger.basePath || '';
     const path = swagger.paths[pathName.slice(basePath.length)];
     const method = path[methodName];
-    const params = []
+    const params = [method.requestBody?.content?.['application/json']]
         .concat(path.parameters)
         .concat(method.parameters)
         .filter(x => x)
         .map(param => {
-            const schema = param.schema || (({name, in: ignore, ...schema}) => schema)(param);
+            const schema = param.schema || param.content?.['application/json']?.schema || (({name, in: ignore, ...schema}) => schema)(param);
             if (['query', 'header', 'path'].indexOf(param.in) !== -1) {
                 param.validate = validator.primitive(schema);
             } else if (param.in === 'formData') {
@@ -21,12 +21,14 @@ function methodValidator(swagger, pathName, methodName) {
             }
             return param;
         });
-    const responses = Object.keys(method.responses).reduce((all, res) => {
-        const response = method.responses[res];
-        all[res] = Object.assign({}, response, {
-            validate: response.schema ? validator.json(response.schema) : validator.empty()
-        });
-        return all;
+    const responses = Object.entries(method.responses).reduce((all, [status, response]) => {
+        const schema = response.schema || response.content?.['application/json']?.schema;
+        return {
+            ...all,
+            [status]: {
+                validate: schema ? validator.json(schema) : validator.empty()
+            }
+        };
     }, {});
     const expected = (pathName.match(/[^/]+/g) || []).map(s => s.toString());
     return {
@@ -110,15 +112,15 @@ function methodValidator(swagger, pathName, methodName) {
             return errors;
         },
         response: async function validateResponse({status, body}) {
-            const validate = (responses[status] || responses.default).validate;
+            const { validate } = responses[status] || responses.default;
             const { error } = await validate(body);
             return error ? [error] : [];
         }
     };
 }
 
-module.exports = (swaggerDocument, pathName, methodName) => {
-    if (pathName && methodName) return methodValidator(swaggerDocument, pathName, methodName);
+module.exports = (swaggerDocument, pathName, methodName, basePath) => {
+    if (pathName && methodName) return methodValidator(swaggerDocument, pathName, methodName, basePath);
     return (async() => {
         const swagger = await swaggerParser.dereference(swaggerDocument);
         return Object.entries(swagger.paths).reduce(

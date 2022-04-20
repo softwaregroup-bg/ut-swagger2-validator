@@ -1,5 +1,5 @@
 const Ajv = require('./ajv');
-const ajv = new Ajv({allErrors: true, $data: true, useDefaults: true});
+const ajv = new Ajv({allErrors: true, $data: true, useDefaults: true, strict: false});
 
 const decorateSchema = originalSchema => {
     const schema = {...originalSchema};
