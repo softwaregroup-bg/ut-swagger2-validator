@@ -1,3 +1,7 @@
+## [0.5.5](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.4...v0.5.5) (2022-04-20)
+
+
+
 ## [0.5.4](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.3...v0.5.4) (2022-04-20)
 
 
