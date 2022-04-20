@@ -1,3 +1,12 @@
+## [0.5.6](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.5...v0.5.6) (2022-04-20)
+
+
+### Bug Fixes
+
+* proper body validation in openapi3 mode ([c768af6](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/c768af6629ce869c767708cb6d9049792e09c2bc))
+
+
+
 ## [0.5.5](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.4...v0.5.5) (2022-04-20)
 
 
