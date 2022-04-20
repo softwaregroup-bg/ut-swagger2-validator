@@ -128,10 +128,20 @@ module.exports = (swaggerDocument, pathName, methodName, basePath) => {
                 if (!pathName.startsWith('x-')) {
                     Object.entries(path).forEach(([methodName, method]) => {
                         if (methodName !== 'parameters' && !methodName.startsWith('x-')) {
+                            let basePath = swagger.swagger && swagger.basePath;
+                            if (swagger.openapi) {
+                                const docUrl = swagger.servers?.[0]?.url;
+                                const schemaUrl = method.servers?.[0]?.url;
+                                basePath = schemaUrl
+                                    ? schemaUrl.startsWith('/') && schemaUrl
+                                    : docUrl?.startsWith('/') && docUrl;
+                            }
+                            if (!basePath) basePath = '';
                             validators[method.operationId] = methodValidator(
                                 swagger,
-                                (swagger.basePath || '') + pathName,
-                                methodName
+                                basePath + pathName,
+                                methodName,
+                                basePath
                             );
                         }
                     });
