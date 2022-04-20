@@ -5,7 +5,8 @@ function methodValidator(swagger, pathName, methodName, basePath) {
     if (!basePath) basePath = swagger.basePath || '';
     const path = swagger.paths[pathName.slice(basePath.length)];
     const method = path[methodName];
-    const params = [method.requestBody?.content?.['application/json']]
+    const requestBody = method.requestBody?.content?.['application/json']; // openapi 3
+    const params = [requestBody && {schema: requestBody.schema, in: 'body'}]
         .concat(path.parameters)
         .concat(method.parameters)
         .filter(x => x)
