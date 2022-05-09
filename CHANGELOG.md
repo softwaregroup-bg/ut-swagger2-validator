@@ -1,3 +1,12 @@
+## [0.5.7](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.6...v0.5.7) (2022-05-09)
+
+
+### Bug Fixes
+
+* enable additional ajv formats ([#10](https://github.com/softwaregroup-bg/ut-swagger2-validator/issues/10)) ([e27cc82](https://github.com/softwaregroup-bg/ut-swagger2-validator/commit/e27cc8260c4f18b3f11b2898a9fcac6c70dbcaba))
+
+
+
 ## [0.5.6](https://github.com/softwaregroup-bg/ut-swagger2-validator/compare/v0.5.5...v0.5.6) (2022-04-20)
 
 
